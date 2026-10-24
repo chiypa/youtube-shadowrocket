@@ -1,0 +1,23 @@
+# Local traffic captures and logs
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.log
+*.har
+
+# Credentials, certificates and local settings
+.env
+.env.*
+*.p12
+*.pfx
+*.pem
+*.key
+*.mobileconfig
+
+# Local tools and temporary files
+__pycache__/
+work/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,16 @@
+YouTube Shadowrocket
+
+This configuration is adapted from Maasea/sgmodule:
+https://github.com/Maasea/sgmodule
+
+Upstream module: YouTube.Enhance.sgmodule
+Upstream project author: Maasea
+Upstream license: Apache License, Version 2.0
+
+Modified configuration maintained in chiypa/youtube-shadowrocket.
+Modifications: fixed Shadowrocket arguments, retained enclosing argument quotes,
+adjusted initplayback query matching, retained the existing added blocking rules,
+and disabled debug output by default.
+
+The YouTube JavaScript processing files are referenced remotely from the
+upstream project and are not bundled in this distribution.
