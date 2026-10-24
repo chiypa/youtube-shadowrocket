@@ -1,8 +1,9 @@
 #!name=YouTube Enhance (Shadowrocket)
-#!desc=适用于小火箭。基于 Maasea/sgmodule 修改，原项目采用 Apache-2.0 许可证
-#!author=Maasea；适配配置维护：chiypa
-# Modified: 固定参数并保留上游 argument 引号；修正 initplayback 查询参数匹配
-# Release: 2026-10-24；基于用户已实测配置，默认关闭调试输出；本次整理未重新做设备测试
+#!desc=Shadowrocket configuration adapted from Maasea/sgmodule (Apache-2.0).
+#!author=Maasea; configuration adaptation maintained by chiypa
+# Modified: fixed arguments with upstream-style enclosing quotes; adjusted initplayback query matching.
+# Release: 2026-10-24; based on user-tested configuration; debug output disabled by default; no new device test.
+# English descriptions added 2026-10-24; filtering rules and script settings unchanged.
 # Original: https://github.com/Maasea/sgmodule
 
 [Rule]

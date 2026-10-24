@@ -1,60 +1,64 @@
 # YouTube Shadowrocket
 
-基于 [Maasea/sgmodule](https://github.com/Maasea/sgmodule) 的 YouTube 小火箭适配配置。
+English | [简体中文](README.zh-CN.md)
 
-已有实际使用反馈：能够拦截部分 YouTube 广告，仍可能漏掉少量广告。效果可能随 YouTube、账号、地区及客户端版本变化。
+A Shadowrocket configuration adapted from [Maasea/sgmodule](https://github.com/Maasea/sgmodule), with setup and troubleshooting instructions.
 
-## 安装
+User feedback confirms that the configuration can filter some YouTube ads, but occasional ads may still appear. Results can vary with YouTube changes, your account, region, and app version.
 
-在 Shadowrocket 中打开 **配置 → 模块 → 右上角 +**，粘贴以下地址并下载：
+## Installation
+
+In Shadowrocket, open **Config → Modules → +**, paste the following URL, and download the module:
 
 ```text
 https://raw.githubusercontent.com/chiypa/youtube-shadowrocket/main/YouTube.Enhance.Shadowrocket.sgmodule
 ```
 
-启用本模块，并停用其他处理相同 YouTube 请求的模块，避免重复处理。
+Enable the module. Disable other modules that process the same YouTube requests to avoid duplicate processing.
 
-## HTTPS 解密
+## HTTPS decryption
 
-本模块需要对指定的 YouTube 域名进行 HTTPS 解密，才能运行请求和响应脚本。
+This module requires HTTPS decryption for the specified YouTube domains so its request and response scripts can run.
 
-1. 在当前使用的配置中打开 **HTTPS 解密**。
-2. 按小火箭提示生成并安装 CA 证书。
-3. 在 iOS **设置 → 通用 → 关于本机 → 证书信任设置**中，完全信任刚安装的 Shadowrocket 证书。
-4. 确认两个远程脚本已下载成功。模块有三条脚本配置，其中两条共用同一文件。
-5. 重新连接小火箭，彻底退出 YouTube 后重新打开。
+1. Open the HTTPS decryption settings for your active Shadowrocket configuration and enable decryption.
+2. Follow Shadowrocket's prompts to generate and install a CA certificate.
+3. In iOS, go to **Settings → General → About → Certificate Trust Settings**, and enable full trust for the Shadowrocket certificate you just installed.
+4. Confirm that both remote script files downloaded successfully. The module has three script entries; two use the same file.
+5. Reconnect Shadowrocket, fully close YouTube, and reopen it.
 
-只在自己的设备上安装、信任自己生成的证书。证书和私钥不随本项目分发。
+Only install and trust certificates you generated for your own devices. This project does not distribute certificates or private keys.
 
-## 本项目的调整
+## Changes in this configuration
 
-- 将上游模板参数改为固定值，并保留 `argument` 的整体引号写法。
-- 修正 `initplayback` 规则，使 `ack` 位于第一个查询参数时也能匹配。
-- 保留原适配配置中的广告域名拦截规则和 UDP 443 阻断规则。
-- 日常版默认设置 `debug:false`，减少调试输出。
+- Replaces upstream argument templates with fixed values and retains the enclosing quotes around `argument`.
+- Adjusts the `initplayback` pattern to match `ack` when it is the first query parameter.
+- Retains the ad-domain blocking rules and UDP port 443 blocking rule from the existing adapted configuration.
+- Sets `debug:false` by default to reduce debug output.
 
-当前固定设置：关闭字幕翻译，隐藏上传及选段按钮，保留 Shorts 按钮。
+The fixed settings disable caption translation, hide the upload and clip buttons, and keep the Shorts button visible.
 
-去广告处理脚本仍直接引用 Maasea 的上游文件，本仓库没有复制或自行实现脚本核心。远程脚本随上游更新，本仓库没有固定其版本。
+The ad-filtering scripts are still loaded directly from Maasea's upstream repository. This repository does not bundle or independently implement the script core. The remote scripts follow upstream updates and are not pinned to a specific revision.
 
-## 速度与排查
+## Performance and troubleshooting
 
-- 日常使用可关闭小火箭的代理日志记录；关闭本模块的调试输出不等于关闭小火箭自己的日志。
-- 解密和脚本处理会增加处理开销。
-- 本模块保留的 UDP 443 阻断规则适用于所有目标域名，会影响其他应用使用该端口的流量，并可能带来连接回退开销。
-- 若感觉变慢，先保持节点、网络和模块不变，对比开启与关闭日志记录的体验。
-- 若仍有广告，先检查 HTTPS 解密、证书信任及脚本下载状态，再检查脚本运行日志。
+- For everyday use, you can turn off Shadowrocket's proxy logging. Disabling this module's debug output does not disable Shadowrocket's own logging.
+- HTTPS decryption and script processing add processing overhead.
+- The retained UDP port 443 blocking rule applies to all destination domains. It affects other apps using that port and may add connection fallback overhead.
+- If loading feels slower, compare logging on and off while keeping your proxy node, network, and module unchanged.
+- If ads still appear, check HTTPS decryption, certificate trust, and script download status, then inspect script execution logs.
 
-请勿直接公开完整代理日志、访问记录、代理订阅链接、证书或私钥。反馈问题时可提供系统和应用版本、广告类型及已去除个人信息的错误信息。
+Do not publicly share complete proxy logs, browsing records, proxy subscription URLs, certificates, or private keys. When reporting an issue, include your OS and app versions, the type of ad, and relevant error messages with personal information removed.
 
-## 验证范围
+## Validation status
 
-2026-10-22 的适配配置收到用户反馈：去广告有效，但仍有少量漏拦。2026-10-24 整理发布文件并默认关闭调试输出。参数已做静态检查；本次发布整理没有重新进行手机端测试。
+The adapted configuration received user feedback on October 22, 2026: ad filtering worked, although some ads remained. Publication files were prepared and debug output was disabled by default on October 24, 2026. The parameters passed static checks; publication preparation did not include another on-device test.
 
-## 致谢与许可证
+The English documentation and module descriptions were added on October 24, 2026. This translation does not change the filtering rules, script settings, or installation URL.
 
-- 原项目及处理脚本：[Maasea/sgmodule](https://github.com/Maasea/sgmodule)
-- 原始模块：[YouTube.Enhance.sgmodule](https://github.com/Maasea/sgmodule/blob/master/YouTube.Enhance.sgmodule)
-- 本仓库：[chiypa/youtube-shadowrocket](https://github.com/chiypa/youtube-shadowrocket)
+## Credits and license
 
-基于 Apache License 2.0 发布，保留上游来源并注明配置修改。详见 [LICENSE](LICENSE) 和 [NOTICE](NOTICE)。
+- Upstream project and processing scripts: [Maasea/sgmodule](https://github.com/Maasea/sgmodule)
+- Original module: [YouTube.Enhance.sgmodule](https://github.com/Maasea/sgmodule/blob/master/YouTube.Enhance.sgmodule)
+- This repository: [chiypa/youtube-shadowrocket](https://github.com/chiypa/youtube-shadowrocket)
+
+Distributed under the Apache License 2.0, with upstream attribution and notices of configuration changes. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
